@@ -1,4 +1,4 @@
-package App.Model;
+package App.Entity;
 
 public class Processes {
 

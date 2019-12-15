@@ -1,7 +1,7 @@
 package App.Service;
 
 import App.Dao.ProcessesDAO;
-import App.Model.Processes;
+import App.Entity.Processes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

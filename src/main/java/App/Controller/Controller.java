@@ -1,5 +1,6 @@
-package App.Model;
+package App.Controller;
 
+import App.Entity.Processes;
 import App.Service.ProcessesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

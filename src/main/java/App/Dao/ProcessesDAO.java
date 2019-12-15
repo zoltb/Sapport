@@ -1,10 +1,9 @@
 package App.Dao;
 
-import App.Model.Processes;
+import App.Entity.Processes;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
 
 @Repository

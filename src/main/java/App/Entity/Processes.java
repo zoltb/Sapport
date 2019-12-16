@@ -2,13 +2,14 @@ package App.Entity;
 
 public class Processes {
 
-    private int PID;
-//    private String name;
+    public int PID;
+    public String name;
 //    private String sessionName;
 //    private int memUsage;
 
 
-    public Processes(int PID) {
+    public Processes(String name, int PID) {
+        this.name = name;
         this.PID = PID;
     }
 

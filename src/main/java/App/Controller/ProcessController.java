@@ -3,44 +3,50 @@ package App.Controller;
 import App.Entity.Processes;
 import App.Service.ProcessesService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @RestController
-public class Controller {
+public class ProcessController {
 
-    @Autowired
-    private ProcessesService processesService;
+//    @Autowired
+//    private ProcessesService processesService;
+//
+//    @RequestMapping()
+//    public Collection<Processes> getAllProcesses() {
+//        return processesService.getAllProcesses();
+//    }
+//
+//    {
+//
+//    }
+//
+//    @RequestMapping("/")
+//    @ResponseBody
+//    public String welcome() {
+//        return "<html><body><h1>Hi there</h1></body></html>";
+//    }
 
-    public Collection<Processes> getAllProcesses() {
-        return processesService.getAllProcesses();
-    }
+    @Value("${initial.message}")
+    private String message;
 
-    {
+    @GetMapping(value ={"/doit"})
+    public List<Processes> hello(Model model) {
 
-    }
 
-    @RequestMapping("/")
-    @ResponseBody
-    public String welcome() {
-        return "<html><body><h1>Hi there</h1></body></html>";
-    }
-
-    @RequestMapping("/doit")
-    @ResponseBody
-    public List<String> hello() {
 
         List<String> processList = new ArrayList<>();
+//
+        List <Processes> pr = new ArrayList<>();
 
+//
         try {
 
             Process process = Runtime.getRuntime().exec("tasklist.exe");
@@ -54,15 +60,25 @@ public class Controller {
             System.out.println("No next line");
         }
 
-        return processListFormatter(processList);
+        pr = processListFormatter(processList);
+
+        model.addAttribute(pr);
+        model.addAttribute("message", message);
+
+        return pr;
+
+
+
+//        Map<Processes> listOfProcesses = new HashMap();
+//
     }
 
-    List<String> processListFormatter(List<String> list) {
+    List<Processes> processListFormatter(List<String> list) {
 
         int space = 0;
         int middle = 0;
 
-        List<String> newList = new ArrayList<>();
+        List<Processes> newList = new ArrayList<>();
 
         //check start
         if (list.get(1).contains("   ")) {
@@ -99,7 +115,9 @@ public class Controller {
             while (matcher.find()) {
                 PID = Integer.valueOf(matcher.group());
             }
-            newList.add(processFinder + "|" + PID);
+
+            newList.add(new Processes(processFinder, PID));
+                    //processFinder + "|" + PID);
         }
         return newList;
     }

@@ -1,14 +1,23 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
     <title>DoIT</title>
     <p th:text="${result}"></p>
     <p align="center"></p>
     <p th:inline="text"></p>
 </head>
 <body>
+<h2>
+    <span th:text="'Hello, '"></span>
+    <span th:text="'Hello, ' + ${pr}"></span>
+</h2>
+</div>
 
-SSSSSSSSSS
+<ol>
+    <li th:each="onePr : ${pr}" th:text="${onePr}"></li>
+</ol>
 </body>
 </html>
